@@ -67,7 +67,7 @@ export default {
         body: JSON.stringify(this.punto),
         headers: {
             "Content-type": "application/json; charset=UTF-8",
-            "   Access-Control-Allow-Origin":"http://192.168.1.4:8080/*",
+            "   Access-Control-Allow-Origin":"http://192.168.1.4:8080/",
            
          },
     })
