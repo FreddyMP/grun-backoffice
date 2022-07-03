@@ -1,28 +1,37 @@
 <template>
 <div class="update">
-     <div class=" fixed-top pt-5">
+    <div class=" fixed-top pt-5">
         <h3>Actualizar</h3>
         <button v-on:click="fetch" class="btn btn-danger">Volver</button>
         <div>
             <br><br><br>
             <div class=" p-5 container" style="background-color:rgba(0, 10, 30, 0.1)" >
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6">
-                        <input class="form-control" v-model="Local" type="text" name="" id="">
+                        <input class="form-control" v-model="punto.NameLocal" type="text" name="NameLocal" id="" placeholder="Local">
                     </div>
                     <div class="col-md-6">
-                        <select class="form-control" name="" id="">
+                        <input class="form-control " v-model="punto.Longitud" type="text" name="Longitud" id="" placeholder="Longitud">
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control mt-3" v-model="punto.Latitud" type="text" name="Latitud" id="" placeholder="Latitud">
+                    </div>
+                    <div class="col-md-6 pt-3">
+                        <select class="form-control" v-model="punto.Type" name="" id="">
                             <option value="1">Punto de carga</option>
                             <option value="2">Reciblaje</option>
                             <option value="3">Paneles solares</option>
                         </select>
                     </div>
-                    <div class="col-md-6">
-                        <Textarea  class="form-control"></Textarea>
+                    <div class="col-md-6 pt-3">
+                        <input type="text"  class="form-control"  v-model="punto.Description" placeholder="Description" name="Description">
+                    </div>
+                    <div class="col-md-6 pt-3">
+                        <input class="form-control" type="file" name="" id="">
                     </div>
                 </div>
-                <button class="btn btn-success">Guardar</button>
+                <a class="btn btn-success mt-3" @click="fetch()">Guardar</a>
             </form>
         </div>
         </div>
@@ -35,17 +44,36 @@
 import axios from 'axios'
 export default {
   name: 'update',
-  data() {
-    return {
-      Local: 'fsdf'
+  data(){
+    return{
+      idPunto:null,
+      punto:{
+        NameLocal :'',
+        Description:'',
+        Longitud:'',
+        Latitud:'',
+        Type:'',
+      }
     }
+  },
+  mounted:function(){
+      this.idPunto = this.$route.params.id
+         axios.get("https://warm-mountain-66927.herokuapp.com/api/puntos/"+ this.idPunto)
+         .then(datos=>{
+          this.punto.Nombre = datos.data.NameLocal;
+          this.punto.NameLocal = datos.data.NameLocal;
+          this.punto.Description = datos.data.Description;
+          this.punto.Longitud = datos.data.Longitud;
+           this.punto.Latitud = datos.data.Latitud;
+          this.punto.Type = datos.data.Type; 
+         })
   },
   methods: {
     fetch(){
        axios
-      .get('https://warm-mountain-66927.herokuapp.com/api/puntos/1')
-      .then(res=>{
-       this.Local = res.data
+      .put('https://warm-mountain-66927.herokuapp.com/api/puntos/'+this.idPunto, this.punto)
+      .then(()=>{
+       this.$route.push("/puntos/");
       })
       .catch(err => {
           console.log(err)

@@ -31,7 +31,7 @@
                         <input class="form-control" type="file" name="" id="">
                     </div>
                 </div>
-                <a class="btn btn-success mt-3" @click="envio">Guardar</a>
+                <a class="btn btn-success mt-3" v-on:click="envio">Guardar</a>
             </form>
         </div>
         </div>
@@ -67,12 +67,10 @@ export default {
         body: JSON.stringify(this.punto),
         headers: {
             "Content-type": "application/json; charset=UTF-8",
-            "   Access-Control-Allow-Origin":"http://192.168.1.4:8080/",
-           
          },
     })
   .then((response) => response.json())
-  .then((json) => console.log(json));
+  .then((json) => console.log(json.stringify(this.punto)));
     },
   }
 }

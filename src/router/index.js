@@ -23,7 +23,7 @@ const routes = [
     component: () => import('../views/Puntos.vue')
   },
   {
-    path: '/update',
+    path: '/update/:id',
     name: 'UpdatePunto',
     component: () => import('../views/updatePunto.vue')
   },

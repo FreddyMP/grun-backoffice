@@ -24,7 +24,7 @@
                 <td>{{Puntos.Description}}</td>
                 <td>{{Puntos.Longitud}}</td>
                 <td>{{Puntos.Latitud}}</td>
-                <td><router-link class="btn btn-danger" to="/update">X</router-link></td>
+                <td><a v-on:click="editar(Puntos.id)">X</a></td>
               </tr>
             </tbody>
           </table>
@@ -56,7 +56,10 @@ export default {
       .catch(err => {
           console.log(err)
       });
-    }
+    },
+    editar(id){
+        this.$router.push('/update/'+id);
+    },
   },
 }
 </script>
