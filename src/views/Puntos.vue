@@ -2,9 +2,9 @@
   <div class="puntos">
     
     <div class=" fixed-top pt-5">
-      <h3>Lista de puntos</h3>
-       <button v-on:click="fetch" class="btn btn-danger">Mostrar</button>
-       <router-link to="/new" class="btn btn-danger ms-3">Nuevo</router-link>
+      <h3 class="text-light">Lista de puntos</h3>
+       <button v-on:click="fetch" class="btn btn-success">Mostrar</button>
+       <router-link to="/new" class="btn btn-success ms-3">Nuevo</router-link>
        <div class="pt-5 container"> <br><br>
           <table class="table pt-5">
            <thead>

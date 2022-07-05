@@ -1,8 +1,8 @@
 <template>
 <div class="update">
     <div class=" fixed-top pt-5">
-        <h3>Actualizar</h3>
-        <button v-on:click="fetch" class="btn btn-danger">Volver</button>
+        <h3 class="text-light">Actualizar</h3>
+        <button v-on:click="volver" class="btn btn-success">Volver</button>
         <div>
             <br><br><br>
             <div class=" p-5 container" style="background-color:rgba(0, 10, 30, 0.1)" >
@@ -52,7 +52,7 @@ export default {
         Description:'',
         Longitud:'',
         Latitud:'',
-        Type:'',
+        Type:1,
       }
     }
   },
@@ -60,7 +60,6 @@ export default {
       this.idPunto = this.$route.params.id
          axios.get("https://warm-mountain-66927.herokuapp.com/api/puntos/"+ this.idPunto)
          .then(datos=>{
-          this.punto.Nombre = datos.data.NameLocal;
           this.punto.NameLocal = datos.data.NameLocal;
           this.punto.Description = datos.data.Description;
           this.punto.Longitud = datos.data.Longitud;
@@ -73,11 +72,14 @@ export default {
        axios
       .put('https://warm-mountain-66927.herokuapp.com/api/puntos/'+this.idPunto, this.punto)
       .then(()=>{
-       this.$route.push("/puntos/");
+       this.$router.push("/puntos/");
       })
       .catch(err => {
           console.log(err)
       });
+    },
+    volver(){
+        this.$router.push('/')
     }
   },
 }
